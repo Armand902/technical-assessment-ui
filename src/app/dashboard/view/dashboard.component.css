@@ -1,0 +1,64 @@
+.card {
+  margin: 5px;
+  width: 240px;
+}
+
+.image {
+  width: 60px;
+  margin-left: 20px;
+}
+
+.statusGreen {
+  color: green;
+}
+
+.statusError {
+  color: red;
+}
+
+.statusStopped {
+  color: orange;
+}
+
+.status {
+  margin-left: 5px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  padding-left: 5px;
+}
+
+.cpu {
+  font-weight: 700;
+}
+
+.divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button {
+  align-items: center;
+  margin-top: 25px;
+}
+
+.divCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  padding-left: 15px;
+  padding-top: 5px;
+  font-size: 16px;
+}
+
+.highlighted {
+  background-color: rgb(202, 255, 202);
+}

@@ -1,0 +1,67 @@
+<div class="container">
+    <mat-card class="card">
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <td class="vertical-align">
+                            <button [routerLink]="['/dashboard', {}]" mat-icon-button>
+                                <mat-icon>arrow_back</mat-icon> Dashboard
+                            </button>
+                        </td>
+                        <tr>
+                            <td> Virtual Machine </td>
+                        </tr>
+                        <tr>
+                            <td> {{asset$?.name ?? "Name not available."}} </td>
+                        </tr>
+                        <tr>
+                            <td *ngIf="asset$?.status == 'Running'" class="vertical-align">
+                                <mat-icon class="statusGreen">check_circle</mat-icon>
+                                <div class="status"> {{asset$?.status}} </div>
+                            </td>
+                            <td *ngIf="asset$?.status != 'Running'" class="vertical-align">
+                                <mat-icon [class.statusStopped]="asset$?.status == 'Stopped'"
+                                    [class.statusError]="asset$?.status != 'Stopped'">error </mat-icon>
+                                <div class="status"> {{asset$?.status ?? "Status not available."}} </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-align ">
+                                <mat-icon>location_on</mat-icon>
+                                <div class="status"> {{asset$?.location ?? "Location not available."}} </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-align">
+                                <mat-icon>add_circle</mat-icon>
+                                <div class="status"> {{asset$?.createdBy ?? "Created by not available."}} </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-align">
+                                <mat-icon>person</mat-icon>
+                                <div class="status"> {{asset$?.owner ?? "Owner not available."}} </div>
+                            </td>
+                        </tr>
+                        <tr class="tags">
+                            <td *ngIf="asset$?.tags == null" class="vertical-align">
+                                <mat-icon>style</mat-icon>
+                                <div *ngIf="asset$?.tags == null" class="status"> Tags not available.</div>
+                            </td>
+                            <td *ngIf="asset$?.tags != null" class="status">
+                                <mat-icon>style</mat-icon>
+                            </td>
+                            <td *ngFor="let tag of asset$?.tags">
+                                <a href="#tag">{{tag}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <img src="assets/images/imac.png" class="image" alt="mac">
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

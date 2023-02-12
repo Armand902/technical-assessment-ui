@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="dashboard">
+        <table>
+            <tr>
+                <td>
+                    <label class="status"> Total VM Running:<span class="statusGreen"> {{totalVMRunning$}}</span>
+                    </label>
+                </td>
+                <td>
+                    <label class="status"> Total VM Down:<span class="statusError"> {{totalVMDown$}}</span>
+                    </label>
+                </td>
+                <td>
+                    <label class="status"> Total CPUs Running:<span class="statusGreen"> {{totalCPURunning$}}</span>
+                    </label>
+                </td>
+                <td>
+                    <label class="status"> Total CPUs Down:<span class="statusError"> {{totalCPUDown$}}</span>
+                    </label>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <mat-form-field class="search">
+                <mat-label>Search name or status</mat-label>
+                <input matInput type="text" [(ngModel)]="searchTerm" (change)="modelChanged(searchTerm)">
+                <button *ngIf=" searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <button (click)="resetFilter()" mat-icon-button>
+                <mat-icon>undo</mat-icon> Reset
+            </button>
+        </div>
+        <div class="divCenter" *ngIf="searchTargetAssets$.length == 0">
+            <mat-spinner></mat-spinner>
+        </div>
+        <table>
+            <tr>
+                <td *ngFor="let currentTargetAsset of searchTargetAssets$">
+                    <div *ngIf="currentTargetAsset != null">
+                        <mat-card class="card" [class.highlighted]="currentTargetAsset.status == 'Running'">
+                            <table>
+                                <tr>
+                                    <table>
+                                        <tr>
+                                            <td> Virtual Machine </td>
+                                        </tr>
+                                        <tr>
+                                            <td> {{currentTargetAsset.name}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="currentTargetAsset.status == 'Running'" class="vertical-align">
+                                                <mat-icon class="statusGreen">check_circle</mat-icon>
+                                                <div class="status"> {{currentTargetAsset.status}} </div>
+                                            </td>
+                                            <td *ngIf="currentTargetAsset.status != 'Running'" class="vertical-align">
+                                                <mat-icon [class.statusStopped]="currentTargetAsset.status == 'Stopped'"
+                                                    [class.statusError]="currentTargetAsset.status != 'Stopped'">error
+                                                </mat-icon>
+                                                <div class="status"> {{currentTargetAsset.status}} </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <td>
+                                        <img src="assets/images/imac.png" class="image" alt="mac">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="vertical-align">
+                                        <mat-icon>developer_board</mat-icon>
+                                        <div class="status"> CPUs <div class="cpu"> {{ currentTargetAsset.cpu}} </div>
+                                        </div>
+                                    </td>
+                                    <td class="vertical-align">
+                                        <mat-icon>memory_icon</mat-icon>
+                                        <div class="status"> RAM <div class="cpu"> {{
+                                                calculateRam(currentTargetAsset.ram)}} MB</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-divider class="divider"></mat-divider>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <button [routerLink]="['/dashboard/assets/', { id:  currentTargetAsset.id }]"
+                                        class="button" mat-raised-button> View details</button>
+                                </tr>
+                            </table>
+                        </mat-card>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
