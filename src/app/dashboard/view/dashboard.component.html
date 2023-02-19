@@ -1,4 +1,8 @@
-<div class="container">
+<!-- Moved the loader to top with better state management.  -->
+<div class="centerLoader" *ngIf="showLoader">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="container" *ngIf="!showLoader">
     <div class="dashboard">
         <table>
             <tr>
@@ -31,9 +35,6 @@
             <button (click)="resetFilter()" mat-icon-button>
                 <mat-icon>undo</mat-icon> Reset
             </button>
-        </div>
-        <div class="divCenter" *ngIf="searchTargetAssets$.length == 0">
-            <mat-spinner></mat-spinner>
         </div>
         <table>
             <tr>
@@ -91,6 +92,9 @@
                             </table>
                         </mat-card>
                     </div>
+                </td>
+                <td *ngIf="searchTargetAssets$.length == 0">
+                    <label> There are no results. </label>
                 </td>
             </tr>
         </table>
