@@ -7,7 +7,8 @@ import { TargetAssetModel } from "./target-asset.dto";
 @Component({
   selector: "app-target-asset",
   templateUrl: "./target-asset.component.html",
-  styleUrls: ["./target-asset.component.css"],
+  //Added the app css to removed duplicate code.
+  styleUrls: ["../app.component.css"],
 })
 export class TargetAssetComponent implements OnInit {
   constructor(private store: Store, private route: ActivatedRoute) {}
