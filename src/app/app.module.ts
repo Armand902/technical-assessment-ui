@@ -15,6 +15,7 @@ import { MaterialModule } from "./shared/material/material.module";
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    //Removed unnecessary import of unused state.
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),
     MaterialModule,

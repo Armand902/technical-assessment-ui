@@ -63,6 +63,7 @@ img {
   background-color: rgb(202, 255, 202);
 }
 
+/* Moved all css to one file for maintainability and duplicate code. */
 .cardAsset {
   margin-top: 10px;
 }
