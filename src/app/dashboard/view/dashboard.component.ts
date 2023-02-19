@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import { TargetAssetModel } from "src/app/target-asset/target-asset.dto";
+import { TargetAssetModel } from "../../../app/target-asset/target-asset.dto";
 import { invokeAPI } from "../store/dashboard.action";
 import { selectDashboard, selectLoading } from "../store/dashboard.selector";
 

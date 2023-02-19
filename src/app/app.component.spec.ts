@@ -1,43 +1,53 @@
+import { ComponentFixture, TestBed, tick } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/view/dashboard.component";
-import { MockStore, provideMockStore } from "@ngrx/store/testing";
-import { TestBed } from "@angular/core/testing";
+import { provideMockStore, MockStore } from "@ngrx/store/testing";
+import { initialState } from "./dashboard/store/dashboard.state";
 
-describe("Auth Guard", () => {
-  let store: MockStore;
-  const initialState = { loggedIn: false };
-
+describe("AppComponent", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      declarations: [AppComponent],
+    }).compileComponents();
+  });
+
+  it("should create the app", () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have the title 'angular-coding-interview'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual("angular-coding-interview");
+  });
+});
+
+describe("Dashboard Component", () => {
+  let component: DashboardComponent;
+  let fixture: ComponentFixture<DashboardComponent>;
+
+  beforeEach(() => {
+    let store: MockStore;
+
+    TestBed.configureTestingModule({
+      declarations: [DashboardComponent],
       providers: [provideMockStore({ initialState })],
     });
 
     store = TestBed.inject(MockStore);
 
-    let component = new DashboardComponent(store);
+    fixture = TestBed.createComponent(DashboardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it("It should return results", () => {
-      var test = component.calculateRam(1000000);
+  //Add more valuable tests to test component, store selector, reducers
 
-      expect(test).toEqual(1);
-    });
+  it(`should have the label with words "Total VM Running:"`, () => {
+    let labelName = fixture.debugElement.query(By.css("")); //TODO Add test
+    expect(labelName.nativeElement.textContent).toBe("Total VM Running:");
   });
 });
-
-// describe("Sample test suite", () => {
-//   test("Initial test", () => {
-//     expect(2).toEqual(3);
-//   });
-//   test("hello world output", () => {
-//     let store: MockStore;
-
-//     let s = new DashboardComponent(store);
-//     expect(s.hello("Ivan")).toEqual("Hello Ivan");
-//   });
-// });
-
-// describe("List virtual machines", () => {
-//   it("It should return results", () => {
-//     expect(true).toBeTruthy();
-//   });
-// });
